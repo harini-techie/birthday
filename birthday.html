@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Happy Birthday 🎂</title>
+
+<!-- 🎂 FAVICON -->
+<link rel="icon" href="data:image/svg+xml,
+<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'>
+<text y='.9em' font-size='90'>🎂</text>
+</svg>">
+
+<style>
+  body{
+    margin:0;height:100vh;overflow:hidden;
+    background:linear-gradient(135deg,#f7c7d9,#f3d6c6);
+    display:flex;align-items:center;justify-content:center;
+    font-family:"Comic Sans MS",cursive;
+  }
+
+  .birthday-text{
+    position:absolute;top:35px;
+    font-size:34px;color:#222;
+  }
+
+  .wrapper{display:flex;align-items:center;gap:80px;}
+
+  .wishes{
+    max-width:420px;
+    font-size:22px;line-height:1.8;
+    color:#4a2c1d;
+    text-align:left;
+  }
+
+  /* Button (hidden first) */
+  .cut-btn{
+    display:none;
+    margin-top:18px;
+    padding:12px 28px;
+    border:none;border-radius:30px;
+    background:linear-gradient(135deg,#ff5f8a,#ff85a2);
+    color:#fff;font-size:18px;
+    cursor:pointer;
+    box-shadow:0 8px 20px rgba(0,0,0,.25);
+  }
+  .cut-btn:hover{transform:scale(1.05);}
+
+  /* Cake */
+  .cake-wrap{position:relative;}
+  .cake{
+    position:relative;
+    width:300px;
+    cursor:pointer;
+    user-select:none;
+  }
+
+  .plate{
+    width:340px;height:20px;background:#ddd;
+    border-radius:50%;
+    margin:8px auto 0;
+  }
+
+  .layer{
+    width:100%;height:75px;
+    border-radius:0 0 25px 25px;
+    position:relative;
+  }
+  .layer.bottom{background:#f6deb3;}
+  .layer.middle{
+    background:repeating-linear-gradient(
+      45deg,#f7a1a1,#f7a1a1 10px,#ffd1d1 10px,#ffd1d1 20px
+    );
+  }
+  .layer.top{
+    background:#7a3a1a;
+    border-radius:25px 25px 15px 15px;
+  }
+
+  /* icing drip */
+  .layer.top::after{
+    content:"";
+    position:absolute;left:0;top:100%;
+    width:100%;height:25px;
+    background:#fff;
+    border-radius:0 0 20px 20px;
+  }
+
+  /* Candles */
+  .candles{
+    position:absolute;top:-45px;left:0;width:100%;
+    display:flex;justify-content:space-around;
+  }
+  .candle{
+    width:12px;height:45px;border-radius:5px;
+    background:repeating-linear-gradient(
+      to bottom,#6ef3c5,#6ef3c5 5px,#fff 5px,#fff 10px
+    );
+    position:relative;
+  }
+  .candle::before{
+    content:"";
+    position:absolute;top:-15px;left:50%;
+    transform:translateX(-50%);
+    width:10px;height:15px;border-radius:50%;
+    background:radial-gradient(circle,yellow,orange);
+    animation:flicker .6s infinite alternate;
+  }
+  .candle.off::before{display:none;}
+
+  @keyframes flicker{
+    to{transform:translateX(-50%) scale(1.2);}
+  }
+
+  /* Smoke */
+  .smoke{
+    position:absolute;top:-20px;left:50%;
+    width:8px;height:8px;border-radius:50%;
+    background:rgba(0,0,0,.25);
+    animation:smoke 1.6s forwards;
+  }
+  @keyframes smoke{
+    0%{transform:translate(-50%,0) scale(1);opacity:1;}
+    100%{transform:translate(-50%,-38px) scale(2);opacity:0;}
+  }
+
+  /* CUT animation: slide a slice out */
+  .slice{
+    position:absolute;
+    top:0; right:0;
+    width:92px;
+    height:235px; /* covers cake layers area */
+    pointer-events:none;
+    opacity:0;
+  }
+  .slice .s-top{height:75px;background:#7a3a1a;border-radius:0 25px 15px 0;}
+  .slice .s-mid{
+    height:75px;
+    background:repeating-linear-gradient(
+      45deg,#f7a1a1,#f7a1a1 10px,#ffd1d1 10px,#ffd1d1 20px
+    );
+  }
+  .slice .s-bot{height:75px;background:#f6deb3;border-radius:0 0 25px 0;}
+
+  .cutting .slice{
+    opacity:1;
+    animation:moveSlice 1.1s ease forwards;
+  }
+  @keyframes moveSlice{
+    0%{transform:translateX(0) rotate(0deg);}
+    100%{transform:translateX(85px) rotate(6deg);}
+  }
+
+  /* Final overlay message */
+  .final-message{
+    position:fixed;inset:0;
+    display:flex;align-items:center;justify-content:center;
+    background:rgba(243,214,198,.92);
+    font-size:48px;
+    color:#7a1f3d;
+    opacity:0;
+    transform:scale(.85);
+    pointer-events:none;
+    transition:.8s;
+  }
+  .final-message.show{
+    opacity:1;
+    transform:scale(1);
+  }
+
+  /* Confetti */
+  .confetti{
+    position:fixed;top:-20px;font-size:18px;
+    animation:fall 5s linear forwards;
+    pointer-events:none;
+  }
+  @keyframes fall{
+    to{transform:translateY(120vh);opacity:0;}
+  }
+
+  @media (max-width:768px){
+    .wrapper{flex-direction:column;gap:35px;text-align:center;}
+    .wishes{text-align:center;}
+  }
+</style>
+</head>
+
+<body>
+
+<div class="birthday-text" id="topText">Click the cake to blow candles 🎉</div>
+
+<div class="wrapper">
+  <!-- LEFT : Wishes + button -->
+  <div class="wishes">
+    Wishing you a day filled with love,<br>
+    laughter, and sweet memories 💕<br>
+    May all your dreams come true ✨
+    <br>
+    <button class="cut-btn" id="cutBtn" type="button">🍰 Cut the Cake</button>
+  </div>
+
+  <!-- RIGHT : Cake -->
+  <div class="cake-wrap">
+    <div class="cake" id="cake">
+      <div class="candles">
+        <div class="candle"></div><div class="candle"></div><div class="candle"></div>
+        <div class="candle"></div><div class="candle"></div><div class="candle"></div>
+      </div>
+
+      <div class="layer top"></div>
+      <div class="layer middle"></div>
+      <div class="layer bottom"></div>
+
+      <!-- moving slice -->
+      <div class="slice" id="slice">
+        <div class="s-top"></div>
+        <div class="s-mid"></div>
+        <div class="s-bot"></div>
+      </div>
+
+      <div class="plate"></div>
+    </div>
+  </div>
+</div>
+
+<div class="final-message" id="finalMsg">✨🤍 Happy Birthday 💛✨</div>
+
+<script>
+  // Confetti
+  const emojis = ["🎉","🎊","✨","💖","💫"];
+  setInterval(() => {
+    const c = document.createElement("div");
+    c.className = "confetti";
+    c.textContent = emojis[Math.floor(Math.random()*emojis.length)];
+    c.style.left = Math.random()*100 + "vw";
+    c.style.animationDuration = (Math.random()*2 + 3) + "s";
+    document.body.appendChild(c);
+    setTimeout(()=>c.remove(), 5200);
+  }, 300);
+
+  const cake = document.getElementById("cake");
+  const cutBtn = document.getElementById("cutBtn");
+  const topText = document.getElementById("topText");
+  const finalMsg = document.getElementById("finalMsg");
+
+  let blown = false;
+  let cut = false;
+
+  // 1) Blow candles
+  cake.addEventListener("click", () => {
+    if (blown) return;
+    blown = true;
+
+    document.querySelectorAll(".candle").forEach(candle => {
+      candle.classList.add("off");
+      const smoke = document.createElement("div");
+      smoke.className = "smoke";
+      candle.appendChild(smoke);
+      setTimeout(()=>smoke.remove(), 1600);
+    });
+
+    topText.textContent = "Now cut the cake 🍰";
+    cutBtn.style.display = "inline-block";
+  });
+
+  // 2) Cut cake -> then show final message
+  cutBtn.addEventListener("click", () => {
+    if (!blown || cut) return;
+    cut = true;
+
+    cake.classList.add("cutting");
+    topText.textContent = "Yayy! 🎂";
+
+    setTimeout(() => {
+      finalMsg.classList.add("show");
+    }, 1200);
+  });
+</script>
+
+</body>
+</html>
