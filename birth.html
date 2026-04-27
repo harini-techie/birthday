@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Happy Birthday 💖</title>
+
+<!-- Favicon: Yellow Heart -->
+<link rel="icon" href="data:image/svg+xml,
+<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'>
+<text y='.9em' font-size='90'>💛</text>
+</svg>">
+
+<style>
+body {
+    margin: 0;
+    font-family: 'Segoe Script', cursive;
+    background: linear-gradient(135deg, #ffb6c1, #ffd1dc, #ffe6f0);
+    text-align: center;
+    overflow-x: hidden;
+}
+
+/* ================= HERO ================= */
+.container {
+    padding: 120px 20px;
+    background: radial-gradient(circle at top, #ffc0cb, #ffd1dc);
+}
+
+.logo {
+    font-size: 48px;
+    margin-bottom: 10px;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.15); }
+    100% { transform: scale(1); }
+}
+
+h1 {
+    font-size: 50px;
+    color: #7a1f3d;
+    min-height: 65px;
+}
+
+.subtitle {
+    font-size: 19px;
+    color: #7a1f3d;
+    margin-bottom: 25px;
+}
+
+button {
+    background: linear-gradient(135deg, #ff5f8a, #ff85a2);
+    color: white;
+    border: none;
+    padding: 15px 34px;
+    font-size: 16px;
+    border-radius: 40px;
+    cursor: pointer;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+}
+
+/* ================= GALLERY ================= */
+.gallery {
+    display: none;
+    padding: 90px 10%;
+    background: linear-gradient(180deg, #ffd1dc, #fff);
+}
+
+.photos {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+}
+
+.photos img {
+    width: 100%;
+    height: 260px;
+    object-fit: cover;
+    border-radius: 22px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+}
+
+/* ================= MESSAGE ================= */
+.message-section {
+    display: none;
+    padding: 110px 20px;
+    background: linear-gradient(135deg, #6b73ff, #8e2de2);
+}
+
+.message-card {
+    max-width: 900px;
+    margin: auto;
+    background: rgba(255,255,255,0.18);
+    backdrop-filter: blur(12px);
+    border-radius: 30px;
+    padding: 45px;
+    color: #fff;
+    box-shadow: 0 18px 45px rgba(0,0,0,0.35);
+
+    display: flex;
+    align-items: center;
+    gap: 40px;
+}
+
+/* LEFT IMAGE */
+.message-img {
+    width: 260px;
+    height: 320px;
+    object-fit: cover;
+    border-radius: 25px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+}
+
+/* RIGHT TEXT */
+.message-text {
+    text-align: left;
+}
+
+.message-text h2 {
+    font-size: 32px;
+    margin-bottom: 20px;
+}
+
+.message-text p {
+    font-size: 16px;
+    line-height: 1.9;
+}
+
+/* Cake Button */
+.cake-btn {
+    margin-top: 25px;
+    background: linear-gradient(135deg, #ffd000, #ffb703);
+    color: #5a2d0c;
+    border: none;
+    padding: 14px 34px;
+    font-size: 16px;
+    border-radius: 35px;
+    cursor: pointer;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+}
+
+.cake-btn:hover {
+    transform: scale(1.05);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .message-card {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .message-text {
+        text-align: center;
+    }
+}
+
+/* ================= HEARTS ================= */
+@keyframes fall {
+    to {
+        transform: translateY(120vh);
+        opacity: 0;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- HERO -->
+<div class="container">
+    <div class="logo">💖</div>
+    <h1 id="typing"></h1>
+    <p class="subtitle">🤍 Today is all about celebrating you 💛</p>
+    <button onclick="showAll()">Start the Celebration 🎉</button>
+</div>
+
+<!-- GALLERY -->
+<div class="gallery" id="gallery">
+    <div class="photos">
+        <img src="images (1).jpg">
+        <img src="images (2).jpg">
+        <img src="images (3).jpg">
+        <img src="images (4).jpg">
+        <img src="images (5).jpg">
+        <img src="images.jpg">
+    </div>
+</div>
+
+<!-- MESSAGE -->
+<div class="message-section" id="message">
+    <div class="message-card">
+
+        <!-- LEFT IMAGE -->
+        <img src="images (2).jpg" class="message-img">
+
+        <!-- RIGHT TEXT -->
+        <div class="message-text">
+            <h2>A Special Message for You 💖</h2>
+            <p>
+                On this special day, I want you to know how grateful I am to have you
+                in my life. Your laughter fills my days with joy, your love gives me
+                strength, and your presence makes everything better.
+                <br><br>
+                You are not just my best friend, you are my happiness, my comfort,
+                and my forever favorite person.
+                <br><br>
+                💕 Happy Birthday, my love. Here’s to many more years of smiles,
+                laughter, and beautiful memories together 💕
+            </p>
+
+            <!-- NEW BUTTON -->
+            <button class="cake-btn" onclick="window.location.href='Birthday.html'">🎂 Cut the Cake</button>
+        </div>
+
+    </div>
+</div>
+
+<script>
+/* Typing Effect */
+const text = "Happy Birthday, Beautiful! 🤍💛";
+let i = 0;
+function typeEffect() {
+    if (i < text.length) {
+        document.getElementById("typing").innerHTML += text.charAt(i);
+        i++;
+        setTimeout(typeEffect, 100);
+    }
+}
+typeEffect();
+
+/* Show All Sections */
+function showAll() {
+    document.getElementById("gallery").style.display = "block";
+    document.getElementById("message").style.display = "block";
+    createHearts();
+}
+
+/* Falling Hearts */
+function createHearts() {
+    for (let i = 0; i < 35; i++) {
+        let heart = document.createElement("div");
+        heart.innerHTML = "✨","💖","💫";
+        heart.style.position = "fixed";
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.top = "-20px";
+        heart.style.fontSize = "24px";
+        heart.style.animation = "fall 5s linear";
+        document.body.appendChild(heart);
+        setTimeout(() => heart.remove(), 5000);
+    }
+}
+</script>
+
+</body>
+</html>
